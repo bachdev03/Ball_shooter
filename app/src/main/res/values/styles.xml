@@ -1,0 +1,9 @@
+<resources>
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@drawable/custom_dialog_background</item>
+        <item name="android:windowMinWidthMajor">75%</item>
+        <item name="android:windowMinWidthMinor">75%</item>
+    </style>
+
+</resources>

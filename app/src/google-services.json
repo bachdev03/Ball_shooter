@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654189231468",
+    "project_id": "ball-shooter-1d3c3",
+    "storage_bucket": "ball-shooter-1d3c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654189231468:android:0588d287a683946f1f0749",
+        "android_client_info": {
+          "package_name": "com.bvbach.ball_shooter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpmM5pgC819qWs1Xwyc4fpMZwcxboP2dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

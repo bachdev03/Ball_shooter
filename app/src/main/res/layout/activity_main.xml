@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/anh_nen">
+
+    <ImageView
+        android:id="@+id/gunImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="Gun Image" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/button_background"
+        android:text="START"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <!-- Button for AUTO mode -->
+    <Button
+        android:id="@+id/autoButton"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="VS AI"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp" />
+
+    <!-- Button for STORE -->
+    <Button
+        android:id="@+id/storeButton"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background"
+        android:text="STORE"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+</LinearLayout>
