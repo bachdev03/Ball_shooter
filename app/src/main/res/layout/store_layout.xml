@@ -7,33 +7,33 @@
     android:padding="16dp"
     android:background="@drawable/anh_nen_store">
 
-    <!-- Row 1 - Item 1 -->
+
     <LinearLayout
         android:id="@+id/item1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="80dp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@id/item2"
         app:layout_constraintHorizontal_chainStyle="spread"
-        android:layout_marginTop="24dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="8dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="4dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="@drawable/border_image"
+                android:scaleType="fitCenter"
                 android:src="@drawable/item1" />
         </androidx.cardview.widget.CardView>
 
@@ -41,21 +41,19 @@
             android:id="@+id/buyButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
+            android:layout_marginTop="8dp"
             android:background="@drawable/button_background"
+            android:text="10$"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Row 1 - Item 2 -->
 
-    <!-- Row 2 - Item 3 -->
     <LinearLayout
         android:id="@+id/item2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_background"
-            android:text="@string/buy"
+            android:text="30$"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
     </LinearLayout>
@@ -121,14 +119,14 @@
             android:id="@+id/buyButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
+            android:text="80$"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:layout_marginTop="8dp" />
     </LinearLayout>
 
-    <!-- Row 2 - Item 4 -->
+
     <LinearLayout
         android:id="@+id/item4"
         android:layout_width="wrap_content"
@@ -160,14 +158,14 @@
             android:id="@+id/buyButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
+            android:text="50$"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:layout_marginTop="8dp" />
     </LinearLayout>
 
-    <!-- Row 3 - Item 5 -->
+
     <LinearLayout
         android:id="@+id/item5"
         android:layout_width="wrap_content"
@@ -200,7 +198,7 @@
             android:id="@+id/buyButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
+            android:text="999$"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -240,12 +238,37 @@
             android:id="@+id/buyButton6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buy"
+            android:text="5$"
             android:background="@drawable/button_background"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:layout_marginTop="8dp" />
+
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/textViewTotalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.988" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="BACK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,11 +28,9 @@
         <!-- Khai báo GameActivity -->
         <activity android:name=".GameActivity" />
 
-        <activity android:name=".AutoModeActivity" />
+        <activity android:name=".LeaderboardActivity" />
 
         <activity android:name=".StoreActivity" />
-
-
 
     </application>
 </manifest>

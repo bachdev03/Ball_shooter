@@ -1,9 +1,12 @@
 package com.bvbach.ball_shooter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -59,9 +62,6 @@ public class GameView extends SurfaceView implements Runnable {
     private int maxBullets = 4;
     private int currentBullets = maxBullets;
     private Handler bulletHandler;
-
-
-
 
 
 
@@ -146,13 +146,13 @@ public class GameView extends SurfaceView implements Runnable {
                     for (int i = 0; i < circlesToAdd; i++) {
                         addNewFallingCircle();
                     }
-                    circlesToAdd++; // Tăng số lượng hình tròn thêm vào mỗi đợt
-                    handler.postDelayed(this, 5000); // Thực hiện lại sau 5 giây
+                    circlesToAdd++;
+                    handler.postDelayed(this, 2000);
                 }
             }
         };
         // Bắt đầu thêm hình tròn
-        handler.postDelayed(addCirclesRunnable, 5000); // Bắt đầu sau 5 giây
+        handler.postDelayed(addCirclesRunnable, 1000);
 
         // Khởi tạo SoundPool
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -166,9 +166,10 @@ public class GameView extends SurfaceView implements Runnable {
         bulletHandler = new Handler();// so luong dan
 
     }
+
     // Phương thức tải súng từ SharedPreferences
     public void loadGunImage() {
-        SharedPreferences preferences = getContext().getSharedPreferences("GamePrefs", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getContext().getSharedPreferences("GamePrefs", MODE_PRIVATE);
         int selectedGunImage = preferences.getInt("selectedGunImage", R.drawable.sung); // Súng mặc định nếu không có
         shooterBitmap = BitmapFactory.decodeResource(getResources(), selectedGunImage);
         shooterWidth = shooterBitmap.getWidth();
@@ -327,7 +328,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
 
             // Vẽ điểm số
-            canvas.drawText("Score: " + score, 30, 140, scorePaint);
+            canvas.drawText("         " + score, 30, 140, scorePaint);
 
             // Tính toán vị trí của nút (góc trên bên phải)
             pauseButtonX = canvas.getWidth() - pauseButtonBitmap.getWidth() - 30; // Cách mép phải 30 pixels
@@ -346,34 +347,52 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-
+    private void saveScoreToDatabase(int score) {
+        SQLiteDatabase database = null;
+        try {
+            String dbPath = getContext().getDatabasePath("ball_shooter.db").getPath();
+            database = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
+            database.execSQL("INSERT INTO bang_diem (diem_so) VALUES (?)", new Object[]{score});
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
     private void showGameOverDialog() {
-
-        // Hiển thị hộp thoại thông báo kết thúc trò chơi
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 pause();
+                // Lưu điểm số vào cơ sở dữ liệu
+                saveScoreToDatabase(score);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Game Over");
                 builder.setMessage("Bạn đã thua rồi, chơi lại nào !");
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Quay về màn hình chính khi người chơi chọn "ok bro"
-                        Intent intent = new Intent(getContext(), MainActivity.class); // Thay thế với Activity chính của bạn
+                        Intent intent = new Intent(getContext(), DifficultySelectionActivity.class);
                         getContext().startActivity(intent);
                     }
                 });
-
+                builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.exit(0);
+                    }
+                });
+                builder.setCancelable(false);
                 builder.show();
             }
         });
     }
 
-
-
     public void resume() {
+
         isPlaying = true;
         gameOver = false; // Reset trạng thái kết thúc trò chơi khi bắt đầu trò chơi
         gameThread = new Thread(this);
@@ -382,14 +401,18 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     public void pause() {
+
         try {
+
             isPlaying = false;
             gameThread.join();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         isPauseButtonVisible = false; // Hiển thị nút continue khi tạm dừng trò chơi
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -466,7 +489,7 @@ public class GameView extends SurfaceView implements Runnable {
 
         // Đặt khẩu súng gần đáy màn hình
         shooterX = screenX / 2;
-        shooterY = screenY - shooterHeight / 2 - 20; // 20dp từ đáy màn hình (có thể điều chỉnh nếu cần)
+        shooterY = screenY - shooterHeight / 2 - 80;
 
         // Điều chỉnh hình nền theo kích thước màn hình
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, (int) screenX, (int) screenY, false);

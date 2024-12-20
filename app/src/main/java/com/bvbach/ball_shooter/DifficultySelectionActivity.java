@@ -17,6 +17,7 @@ public class DifficultySelectionActivity extends AppCompatActivity {
         Button easyButton = findViewById(R.id.easyButton);
         Button mediumButton = findViewById(R.id.mediumButton);
         Button hardButton = findViewById(R.id.hardButton);
+        Button buttonBackdf = findViewById(R.id.buttonBack);
 
         easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +39,13 @@ public class DifficultySelectionActivity extends AppCompatActivity {
                 startGame("hard");
             }
         });
-
+        // Xử lý nút quay lại
+        buttonBackdf.setOnClickListener(view -> {
+            Intent intent = new Intent(DifficultySelectionActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void startGame(String difficulty) {

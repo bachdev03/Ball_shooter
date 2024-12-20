@@ -1,5 +1,6 @@
 package com.bvbach.ball_shooter;
 
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GameActivity extends AppCompatActivity {
     private GameView gameView;
     private ImageView gunImageView; // ImageView để hiển thị súng
-    private int selectedGunImage;  // Biến để lưu ảnh súng đã chọn
+    private int selectedGunImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,6 @@ public class GameActivity extends AppCompatActivity {
         selectedGunImage = getSelectedGunImage();
         // Cập nhật súng cho game
         gunImageView.setImageResource(selectedGunImage);
-
 
         // Lấy độ khó từ Intent
         String difficulty = getIntent().getStringExtra("difficulty");
